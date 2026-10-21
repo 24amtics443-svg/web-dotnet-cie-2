@@ -1,0 +1,57 @@
+@* This view receives posts from the JSONPlaceholder API. *@
+@model List<Task_2.Models.Post>
+
+@{
+    @* Sets the page title. *@
+    ViewData["Title"] = "Posts";
+}
+
+@* Displays page heading. *@
+<h2>Posts from JSONPlaceholder</h2>
+
+@* Creates a table for API data. *@
+<table class="table table-bordered table-striped">
+
+    @* Table header. *@
+    <thead>
+        <tr>
+
+            @* Post ID column. *@
+            <th>Post ID</th>
+
+            @* Post title column. *@
+            <th>Title</th>
+
+        </tr>
+    </thead>
+
+    @* Table body. *@
+    <tbody>
+
+        @* Loops through all posts. *@
+        @foreach (var post in Model)
+        {
+            @* Creates a row for each post. *@
+            <tr>
+
+                @* Displays post ID. *@
+                <td>@post.Id</td>
+
+                @* Displays post title. *@
+                <td>@post.Title</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@* Button to return to doctor list. *@
+<a asp-controller="Doctor"
+   asp-action="Index"
+   class="btn btn-secondary">
+
+    Back to Doctors
+
+</a>

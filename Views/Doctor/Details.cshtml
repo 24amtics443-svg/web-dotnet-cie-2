@@ -1,0 +1,120 @@
+@* This view receives one Doctor object. *@
+@model Task_2.Models.Doctor
+
+@{
+    @* Sets the page title. *@
+    ViewData["Title"] = "Doctor Details";
+}
+
+@* Displays page heading. *@
+<h2>Doctor Details</h2>
+
+@* Checks whether a success message exists. *@
+@if (TempData["Message"] != null)
+{
+    @* Displays the success message. *@
+    <div class="alert alert-success">
+
+        @* Displays the message. *@
+        @TempData["Message"]
+
+    </div>
+}
+
+@* Creates a card for doctor information. *@
+<div class="card p-4">
+
+    @* Displays doctor name. *@
+    <h3>@Model.DoctorName</h3>
+
+    @* Displays Doctor ID. *@
+    <p>
+        <strong>Doctor ID:</strong>
+        @Model.DoctorId
+    </p>
+
+    @* Displays specialization. *@
+    <p>
+        <strong>Specialization:</strong>
+        @Model.Specialization
+    </p>
+
+    @* Displays experience. *@
+    <p>
+        <strong>Experience:</strong>
+        @Model.Experience Years
+    </p>
+
+    @* Displays consultation fee. *@
+    <p>
+        <strong>Consultation Fee:</strong>
+        ₹@Model.ConsultationFee
+    </p>
+
+    @* Displays consultation fee plus ₹100 service charge. *@
+    <p>
+        <strong>Total Charge:</strong>
+        ₹@ViewBag.TotalCharge
+    </p>
+
+    @* Displays patient name from Cookie. *@
+    <p>
+        <strong>Patient:</strong>
+        @ViewBag.PatientName
+    </p>
+
+</div>
+
+<hr />
+
+@* Appointment form heading. *@
+<h3>Book Appointment</h3>
+
+@* Form sends data to Appointment action using POST. *@
+<form asp-controller="Doctor"
+      asp-action="Appointment"
+      method="post">
+
+    @* Hidden field sends DoctorId to controller. *@
+    <input type="hidden"
+           name="DoctorId"
+           value="@Model.DoctorId" />
+
+    @* Patient name section. *@
+    <div class="mb-3">
+
+        @* Label for patient name. *@
+        <label>Patient Name</label>
+
+        @* Input field for patient name. *@
+        <input type="text"
+               name="PatientName"
+               class="form-control"
+               required />
+
+    </div>
+
+    @* Specialization section. *@
+    <div class="mb-3">
+
+        @* Label for specialization. *@
+        <label>Specialization</label>
+
+        @* Displays specialization. *@
+        <input type="text"
+               name="Specialization"
+               value="@Model.Specialization"
+               class="form-control"
+               readonly />
+
+    </div>
+
+    @* Submit button. *@
+    <button type="submit"
+            class="btn btn-primary">
+
+        Request Appointment
+
+    </button>
+
+</form>

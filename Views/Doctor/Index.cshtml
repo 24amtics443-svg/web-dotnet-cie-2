@@ -1,0 +1,89 @@
+@* This view receives a list of Doctor objects. *@
+@model List<Task_2.Models.Doctor>
+
+@{
+    @* Sets the browser/page title. *@
+    ViewData["Title"] = "Doctor List";
+}
+
+@* Displays the main heading. *@
+<h2>Doctor List</h2>
+
+@* Creates a button to open the Posts page. *@
+<a asp-controller="Doctor"
+   asp-action="Posts"
+   class="btn btn-primary mb-3">
+
+    @* Button text. *@
+    View Posts
+</a>
+
+@* Creates a table for doctor information. *@
+<table class="table table-bordered table-striped">
+
+    @* Table header section. *@
+    <thead>
+        <tr>
+            @* Doctor ID column. *@
+            <th>Doctor ID</th>
+
+            @* Doctor name column. *@
+            <th>Doctor Name</th>
+
+            @* Specialization column. *@
+            <th>Specialization</th>
+
+            @* Experience column. *@
+            <th>Experience</th>
+
+            @* Consultation fee column. *@
+            <th>Consultation Fee</th>
+
+            @* Details button column. *@
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    @* Table body section. *@
+    <tbody>
+
+        @* Loops through every doctor. *@
+        @foreach (var doctor in Model)
+        {
+            @* Creates a row for the current doctor. *@
+            <tr>
+
+                @* Displays Doctor ID. *@
+                <td>@doctor.DoctorId</td>
+
+                @* Displays Doctor Name. *@
+                <td>@doctor.DoctorName</td>
+
+                @* Displays Specialization. *@
+                <td>@doctor.Specialization</td>
+
+                @* Displays Experience. *@
+                <td>@doctor.Experience Years</td>
+
+                @* Displays Consultation Fee. *@
+                <td>₹@doctor.ConsultationFee</td>
+
+                @* Creates the details button. *@
+                <td>
+
+                    @* Passes DoctorId through Query String. *@
+                    <a asp-controller="Doctor"
+                       asp-action="Details"
+                       asp-route-DoctorId="@doctor.DoctorId"
+                       class="btn btn-success">
+
+                        @* Button text. *@
+                        View Details
+                    </a>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
